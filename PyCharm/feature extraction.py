@@ -16,7 +16,7 @@ tracks_ordner_arr = ["../daten/300progenre/death metal/", "../daten/300progenre/
 #genre = 'death metal'
 genre_arr = ["death metal", "blues", "edm", "hiphop", "reggea"]
 genreid_arr = [1,2,3,4,5] # deathmetal = 1, blues = 2 usw.
-zieldatei ="daten.csv"
+zieldatei ="daten2.csv"
 
 n = 0
 
@@ -59,15 +59,24 @@ def getfeatures(y, sr):
     zero_crossings = librosa.zero_crossings(y)
     getfeatures.zcr = sum(zero_crossings)
 
+    #spectral bandwith:
+    spec_bw = librosa.feature.spectral_bandwidth(y=y, sr=sr) [0]
+    getfeatures.spec_bw_durchschnitt = np.mean(spec_bw)
 
-def csvschreiben(genre, BPM, rolloff, centroid, rms_durchschnitt, zcr, mfcc1, mfcc2, mfcc3, mfcc4, mfcc5, mfcc6, mfcc7, mfcc8, mfcc9, mfcc10, mfcc11 ,mfcc12, mfcc13):
+
+    #spectral flatness:
+    spec_flatness = librosa.feature.spectral_flatness(y=y) [0]
+    getfeatures.spec_flatness_durchschnitt = np.mean(spec_flatness)
+
+
+def csvschreiben(genre, BPM, rolloff, centroid, rms_durchschnitt, zcr, spec_bw, spec_flatness, mfcc1, mfcc2, mfcc3, mfcc4, mfcc5, mfcc6, mfcc7, mfcc8, mfcc9, mfcc10, mfcc11 ,mfcc12, mfcc13):
     with open(zieldatei, 'a', newline='') as datei:
         writer = csv.writer(datei)
-        writer.writerow([genre, BPM, rolloff, centroid, rms_durchschnitt, zcr, mfcc1, mfcc2, mfcc3, mfcc4, mfcc5, mfcc6, mfcc7, mfcc8, mfcc9, mfcc10, mfcc11 ,mfcc12, mfcc13])
+        writer.writerow([genre, BPM, rolloff, centroid, rms_durchschnitt, zcr, spec_bw, spec_flatness, mfcc1, mfcc2, mfcc3, mfcc4, mfcc5, mfcc6, mfcc7, mfcc8, mfcc9, mfcc10, mfcc11 ,mfcc12, mfcc13])
 
 with open(zieldatei, 'w', newline='') as datei:
     writer = csv.writer(datei)
-    writer.writerow(["genre", "bpm", "rolloff", "centroid", "rms", "zcr", "mfcc1", "mfcc2", "mfcc3", "mfcc4", "mfcc5", "mfcc6", "mfcc7", "mfcc8", "mfcc9", "mfcc10", "mfcc11" ,"mfcc12", "mfcc13"])
+    writer.writerow(["genre", "bpm", "rolloff", "centroid", "rms", "zcr", "spec_bw", "spec_flatness", "mfcc1", "mfcc2", "mfcc3", "mfcc4", "mfcc5", "mfcc6", "mfcc7", "mfcc8", "mfcc9", "mfcc10", "mfcc11" ,"mfcc12", "mfcc13"])
 
 for e in tracks_ordner_arr:
     tracks_ordner = e
@@ -79,7 +88,7 @@ for e in tracks_ordner_arr:
     for x in os.listdir(tracks_ordner):
         y, sr = librosa.load(tracks_ordner + x)
         getfeatures(y, sr)
-        csvschreiben(genre, getfeatures.tempo, getfeatures.rolloff_durchschnitt, getfeatures.centroid_durchschnitt, getfeatures.rms_durchschnitt, getfeatures.zcr, mfcc1[0], mfcc2[0], mfcc3[0], mfcc4[0], mfcc5[0], mfcc6[0], mfcc7[0], mfcc8[0], mfcc9[0], mfcc10[0], mfcc11[0], mfcc12[0], mfcc13[0])
+        csvschreiben(genre, getfeatures.tempo, getfeatures.rolloff_durchschnitt, getfeatures.centroid_durchschnitt, getfeatures.rms_durchschnitt, getfeatures.zcr, getfeatures.spec_bw_durchschnitt, getfeatures.spec_flatness_durchschnitt, mfcc1[0], mfcc2[0], mfcc3[0], mfcc4[0], mfcc5[0], mfcc6[0], mfcc7[0], mfcc8[0], mfcc9[0], mfcc10[0], mfcc11[0], mfcc12[0], mfcc13[0])
         i = len(os.listdir(tracks_ordner))
         pbar.update(100/i)
 
