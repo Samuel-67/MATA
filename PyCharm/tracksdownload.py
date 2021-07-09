@@ -6,7 +6,7 @@ import requests
 client_credentials_manager = SpotifyClientCredentials(client_id= '38e9a036557b4866822c8a0ace872f8e', client_secret= 'e83625f29c194311ba237eafda54e558')
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-playlist_id = '6MXkE0uYF4XwU4VTtyrpfP'
+playlist_id = '7ydH5VTzJAlIz1PT9ejQc6'
 playlist = sp.playlist_tracks(playlist_id) # playlist einmal laden um die Anzahl tracks zu bekommen ('total')
 
 durchgaenge = math.ceil(playlist['total']/100) # wie oft soll der unter for loop gemacht werden (anzahl tracks durch hundert, weil pro durchgang 100 tracks gedownloadet werden). ist gerundet auf die nächst höhere gnaze zahl, damit auch wenn es nur noch 6 tracks sind noch ein durchgang gemacht wird
@@ -14,8 +14,8 @@ offset = 0
 p = 0
 nummer = 0
 
-pfad = '../daten/hiphop/'
-genre = 'hiphop'
+pfad = '../daten/reggae/'
+genre = 'reggae'
 
 for i in range (int(durchgaenge)):
     playlistdaten = sp.playlist_tracks(playlist_id, offset=offset)

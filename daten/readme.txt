@@ -1,0 +1,1 @@
+songsalt: dort sind die songs zu den genres drin die ich als erstes heruntergeladen habe. Dort hat es manchmal noch zu wenig pro genre --> habe ich neue Ordner gemacht

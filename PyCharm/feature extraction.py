@@ -12,11 +12,11 @@ np.set_printoptions(threshold=np.inf)
 # y, sr = librosa.load('../daten/Blues/Blues0.mp3')
 
 #tracks_ordner = "../daten/death metal/"
-tracks_ordner_arr = ["../daten/300progenre/death metal/", "../daten/300progenre/blues/", "../daten/300progenre/edm/", "../daten/300progenre/hiphop/", "../daten/300progenre/reggea/"]
+tracks_ordner_arr = ["../daten/500progenre/death metal/", "../daten/500progenre/blues/", "../daten/500progenre/edm/", "../daten/500progenre/hiphop/", "../daten/500progenre/reggae/"]
 #genre = 'death metal'
 genre_arr = ["death metal", "blues", "edm", "hiphop", "reggea"]
 genreid_arr = [1,2,3,4,5] # deathmetal = 1, blues = 2 usw.
-zieldatei ="daten2.csv"
+zieldatei ="daten4.csv"
 
 n = 0
 
