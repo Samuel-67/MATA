@@ -55,7 +55,7 @@ def getfeatures(y, sr):
     rms = librosa.feature.rms(y=y)
     getfeatures.rms_durchschnitt = np.mean(rms)
 
-    #zero crossing rate (anzahl)
+    #zero crossing rate (anzahl im ganzen ausschnitt)
     zero_crossings = librosa.zero_crossings(y)
     getfeatures.zcr = sum(zero_crossings)
 
